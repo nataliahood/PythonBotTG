@@ -1,5 +1,6 @@
 import random
-from telebot import TeleBot, types
+import telebot 
+from telebot import types
 import os
 import schedule
 from threading import Thread
