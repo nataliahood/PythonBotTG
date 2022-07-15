@@ -1,6 +1,5 @@
 import random
-import telebot
-from telebot import types
+from telebot import TeleBot, types
 import os
 import schedule
 from threading import Thread
@@ -16,7 +15,7 @@ file = open('stic.txt', 'r', encoding='utf-8')
 stic = file.read().split('\n')
 file.close()
 
-bot = telebot.TeleBot('Вставьте_свой_токен')
+bot = telebot.TeleBot('5593550302:AAEq5dkID1q0l_LnlnSY3YLQhxY162uVI1k')
 
 
 @bot.message_handler(commands=['start'])
@@ -46,11 +45,11 @@ def get_handle_text(message):
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         item1 = types.KeyboardButton('Спасибо, мне уже лучше👍🏽')
         markup.add(item1)
-        bot.send_message(message.chat.id, 'Я буду присылать тебе слова поддержки каждые 10 минут! До тех пор, пока тебе не станет легче😌', reply_markup=markup)
+        bot.send_message(message.chat.id, 'Я буду присылать тебе слова поддержки каждый каждый час! До тех пор, пока тебе не станет легче😌', reply_markup=markup)
         user_id = message.from_user.id
         def function_to_run():
             bot.send_message(user_id, random.choice(support))
-        schedule.every(10).minutes.do(function_to_run)
+        schedule.every(60).minutes.do(function_to_run)
     elif message.text.strip() == 'Спасибо, мне уже лучше👍🏽':
         stickers = str(random.choice(stic))
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -63,11 +62,11 @@ def get_handle_text(message):
         schedule.clear()
     elif message.text.strip() == 'Кто тебя создал?':
         markup = types.InlineKeyboardMarkup()
-        button1 = types.InlineKeyboardButton('Сайт-визитка', url='https://nataliahood.github.io/')
+        button1 = types.InlineKeyboardButton('Сайт-визитка', url='https://nataliahood.ru/')
         markup.add(button1)
         bot.send_message(message.chat.id, 'Тебе правда интересно?☺ Переходи по ссылке!'.format(message.from_user), reply_markup=markup)
     else:
-        bot.send_message(message.chat.id, 'Ой... кажется, я еще не умею читать сообщения с клавиатуры😥 Если хочешь написать мне, жми по кнопкам ниже😊')
+        bot.send_message(message.chat.id, 'Ой... кажется, я еще не умею читать сообщения с клавиатуры😥 Если хочешь написать мне, жми по кнопкам моего меню😊')
         bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEMszhitv7mZurHw02jOtUsHXmO9O84-QACDxUAAlAAATlItNCNfsmsILopBA')
 
 
@@ -80,4 +79,9 @@ def schedule_checker():
 Thread(target=schedule_checker).start()
 
 
-bot.polling(none_stop=True, interval=0)
+def main():
+    bot.infinity_polling()
+
+
+if __name__ == '__main__':
+    main()
