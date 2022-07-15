@@ -46,7 +46,7 @@ def get_handle_text(message):
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         item1 = types.KeyboardButton('Спасибо, мне уже лучше👍🏽')
         markup.add(item1)
-        bot.send_message(message.chat.id, 'Я буду присылать тебе слова поддержки каждый каждый час! До тех пор, пока тебе не станет легче😌', reply_markup=markup)
+        bot.send_message(message.chat.id, 'Я буду присылать тебе слова поддержки каждый час! До тех пор, пока тебе не станет легче😌', reply_markup=markup)
         user_id = message.from_user.id
         def function_to_run():
             bot.send_message(user_id, random.choice(support))
