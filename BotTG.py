@@ -16,7 +16,7 @@ file = open('stic.txt', 'r', encoding='utf-8')
 stic = file.read().split('\n')
 file.close()
 
-bot = telebot.TeleBot('5593550302:AAEq5dkID1q0l_LnlnSY3YLQhxY162uVI1k')
+bot = telebot.TeleBot('Введите свой токен')
 
 
 @bot.message_handler(commands=['start'])
